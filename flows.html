@@ -23,9 +23,26 @@ var svg = d3.select("#my_dataviz")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 
+// 1) read column names
+// 2) identify max values
+// 3) allow multiple series
+// 4) identify and define axis max values
+// 5) adjust graph size
+// 6) fonts
+// 7) legend
+
 //Read the data
-d3.csv("https://raw.githubusercontent.com/htuovila/abc-test-data/master/data/Data_001.csv", function(data) {
+var sources = ["https://raw.githubusercontent.com/htuovila/abc-test-data/master/data/Data_007.csv",
+        "https://raw.githubusercontent.com/htuovila/abc-test-data/master/data/Data_008.csv"]
+
+Promise.all([
+    for (const link of sources){
+        d3.csv(link),
+    }
+]).then(function(data) {
 //d3.csv("/Users/htuovila/Projects/git/abc-test-data/data/Data_001.csv", function(data) {
+
+window.alert(data)
 
 function getJsDateFromExcel(excelDate) {
     var dateTemp = new Date((excelDate - (25567 + 1))*86400*1000);
@@ -97,6 +114,6 @@ svg.append("path")
       .text("SIBT");      
 
 
-})
+});
 
 </script>
